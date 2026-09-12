@@ -2,11 +2,18 @@
 
 **Provider-agnostic AI abstraction layer**
 
-Unified `generate` / `stream` / `embed` / `tool` / `evaluate` API across OpenAI, Anthropic, Gemini, and local models.
+Unified generate / stream / embed / tool / evaluate API across OpenAI, Anthropic, Gemini, and local models.
 
-Part of [ARIEX4Ops / X4](https://github.com/dhe-cruzer69).
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
+[![Status](https://img.shields.io/badge/status-v0.1-orange)](CHANGELOG.md)
+
+Part of **[ARIEX4Ops / X4](https://github.com/dhe-cruzer69)**.
+
+---
 
 ## Goal
+
+Applications should not rewrite their AI integration when the underlying provider changes.
 
 ```python
 from x4.ai import X4AI
@@ -14,16 +21,14 @@ from x4.ai import X4AI
 ai = X4AI()
 response = await ai.generate(
     model="openai/gpt-4o",
-    messages=[{"role": "user", "content": "..."}],
+    messages=[{"role": "user", "content": "Hello"}],
     tools=[...],
 )
 ```
 
-Switch providers without rewriting application code.
+## Architecture
 
-## Status
-
-v0.1 foundation.
+See [ARCHITECTURE.md](ARCHITECTURE.md).
 
 ## Related
 
@@ -37,4 +42,4 @@ Apache-2.0
 
 ## Support
 
-[GitHub Sponsors](https://github.com/sponsors/dhe-cruzer69)
+**[GitHub Sponsors](https://github.com/sponsors/dhe-cruzer69)**
