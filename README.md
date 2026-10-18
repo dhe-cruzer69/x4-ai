@@ -30,6 +30,34 @@ response = await ai.generate(
 
 See [ARCHITECTURE.md](ARCHITECTURE.md).
 
+<!-- X4-APEX-DIAGRAM-START:x4-ai -->
+
+```mermaid
+flowchart TB
+    CALLER[Application or Agent] --> API[Unified X4AI Interface]
+    API --> OP[Generate]
+    API --> STREAM[Stream]
+    API --> EMBED[Embed]
+    API --> TOOLS[Tool Invocation]
+    API --> EVAL[Evaluate]
+    OP --> ROUTE[Provider Resolver]
+    STREAM --> ROUTE
+    EMBED --> ROUTE
+    TOOLS --> ROUTE
+    EVAL --> ROUTE
+    ROUTE --> OPENAI[OpenAI Adapter]
+    ROUTE --> ANTHROPIC[Anthropic Adapter]
+    ROUTE --> GEMINI[Gemini Adapter]
+    ROUTE --> LOCAL[Local Model Adapter]
+    OPENAI --> NORMALIZE[Normalize Provider Response]
+    ANTHROPIC --> NORMALIZE
+    GEMINI --> NORMALIZE
+    LOCAL --> NORMALIZE
+    NORMALIZE --> CALLER
+```
+
+<!-- X4-APEX-DIAGRAM-END:x4-ai -->
+
 ## Related
 
 - [x4-agents](https://github.com/dhe-cruzer69/x4-agents)
