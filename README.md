@@ -32,27 +32,7 @@ response = await ai.generate(
 
 > Status: architecture documentation; implementation and deployment claims require independent verification.
 
-```mermaid
-flowchart TB
-  Client[Calling feature] --> Contract[Provider request contract]
-  Contract --> Policy{Provider permitted by config?}
-  Policy -->|no| Block[Fail closed]
-  Policy -->|yes| Router[Provider selector]
-  Router --> Local[Local adapter]
-  Router --> OpenAI[OpenAI adapter]
-  Router --> Anthropic[Anthropic adapter]
-  Local --> Normalize[Normalize response + usage]
-  OpenAI --> Normalize
-  Anthropic --> Normalize
-  Normalize --> Validate[Validate output schema]
-  Validate -->|invalid| Error[Typed provider error]
-  Validate -->|valid| Cost[Record usage / estimated cost]
-  Cost --> Result[Return response + provenance]
-  Router --> Retry[Bounded retry policy]
-  Retry -.only retry safe transient failures.-> Router
-```
 **Evidence note:** Adapters, provider configuration, retries, and cost accounting are target integration points. Never imply a provider is available unless its adapter and configuration are present.
-
 
 See [ARCHITECTURE.md](ARCHITECTURE.md).
 
